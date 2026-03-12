@@ -1,4 +1,4 @@
-package com.haeni.carrot_pipeline
+package com.haeni.carrot
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest

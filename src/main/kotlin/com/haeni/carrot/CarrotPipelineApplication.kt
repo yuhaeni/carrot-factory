@@ -1,4 +1,4 @@
-package com.haeni.carrot_pipeline
+package com.haeni.carrot
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

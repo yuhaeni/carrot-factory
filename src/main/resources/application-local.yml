@@ -1,0 +1,39 @@
+spring:
+
+  datasource:
+    url: jdbc:postgresql://localhost:5433/carrot_pipeline
+    username: root
+    password: root1234@
+    driver-class-name: org.postgresql.Driver
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all  # 메시지 유실 방지
+      retries: 3
+      properties:
+        enable.idempotence: true  # 중복 발행 방지
+    consumer:
+      group-id: order-consumer-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "com.order.orderpipeline.*"
+    # 리스너 설정
+    listener:
+      ack-mode: record  # 메시지 단위 커밋
+
+# ── Actuator ──
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics

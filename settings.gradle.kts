@@ -1,1 +1,1 @@
-rootProject.name = "carrot-pipeline"
+rootProject.name = "carrot"
