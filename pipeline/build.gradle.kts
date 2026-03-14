@@ -1,22 +1,36 @@
 plugins {
     kotlin("jvm")
+    kotlin("plugin.spring")
+    id("org.springframework.boot")
+    id("io.spring.dependency-management")
 }
 
-group = "com.haeni"
-version = "0.0.1-SNAPSHOT"
-
-repositories {
-    mavenCentral()
+tasks.bootJar { enabled = false }
+tasks.jar {
+    enabled = true
+    archiveClassifier.set("")  // ← 추가
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
+    implementation(project(":core"))
+    implementation(project(":infrastructure"))
+
+    // Spring boot
+    implementation("org.springframework.boot:spring-boot-starter")
+
+    // Kafka Consumer
+    implementation("org.springframework.kafka:spring-kafka")
+
+    // JPA
+//    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
+    // Kotlin
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+    // Test
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.kafka:spring-kafka-test")
 }
 
-kotlin {
-    jvmToolchain(21)
-}
 
-tasks.test {
-    useJUnitPlatform()
-}
+

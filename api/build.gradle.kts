@@ -1,22 +1,38 @@
 plugins {
     kotlin("jvm")
-}
-
-group = "com.haeni"
-version = "0.0.1-SNAPSHOT"
-
-repositories {
-    mavenCentral()
+    kotlin("plugin.spring")
+    id("org.springframework.boot")
+    id("io.spring.dependency-management")
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
-}
+    implementation(project(":core"))
+    implementation(project(":infrastructure"))
+    implementation(project(":pipeline"))
 
-kotlin {
-    jvmToolchain(21)
-}
+    // Web
+    implementation("org.springframework.boot:spring-boot-starter-web")
 
-tasks.test {
-    useJUnitPlatform()
+    // Kafka
+    implementation("org.springframework.kafka:spring-kafka")
+
+    // JPA
+//    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
+    // Validation
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+
+    // Actuator
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+
+    // Kotlin
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+    // Database
+//    runtimeOnly("org.postgresql:postgresql")
+
+    // Test
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testRuntimeOnly("com.h2database:h2")
 }
