@@ -1,0 +1,46 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./gradlew --quiet dependencies && echo '✅ Spring Boot 프로젝트 준비 완료'",
+            "timeout": 300
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|Create",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/security-check.sh"
+          }
+        ]
+      },
+      {
+        "matcher":  "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/dispatcher.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|MultiEdit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/format-files.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
