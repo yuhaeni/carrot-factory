@@ -106,5 +106,41 @@ if [[ "$FILE_PATH" =~ /(controller|api)/.*Controller\.kt$ ]]; then
     fi
 fi
 
+
+# ============================================
+# 멘토 규칙 1: Controller 파일 수정 시 멘토링
+# ============================================
+if [[ "$FILE_PATH" =~ /(controller|api)/.*Controller\.kt$ ]]; then
+    if [[ "$TOOL_NAME" =~ ^(Edit|Write|MultiEdit)$ ]]; then
+        FILENAME=$(basename "$FILE_PATH")
+        ENTITY_NAME=$(echo "$FILENAME" | sed 's/Controller\.kt$//')
+
+        echo "🎯 [컨트롤러 수정 감지] ${ENTITY_NAME} API 컨트롤러를 수정하려고 합니다." >&2
+        echo "📚 아키텍트 멘토의 조언: 컨트롤러 수정 전에 다음을 확인하세요:" >&2
+        echo "   - src/main/kotlin/.../domain/${ENTITY_NAME}.kt (엔티티)" >&2
+        echo "   - src/main/kotlin/.../service/${ENTITY_NAME}Service.kt (비즈니스 로직)" >&2
+        echo "   - src/main/kotlin/.../dto/${ENTITY_NAME}Request.kt, ${ENTITY_NAME}Response.kt (DTO)" >&2
+        echo "   - 기존 API 패턴과의 일관성" >&2
+        echo "💡 먼저 관련 파일들을 읽고 계획을 세워주세요!" >&2
+        exit 2
+    fi
+fi
+
+# ============================================
+# 멘토 규칙 2: Entity/Domain 파일 수정 시 영향도 경고
+# ============================================
+if [[ "$FILE_PATH" =~ /(entity|domain)/.*\.kt$ ]]; then
+    if [[ "$TOOL_NAME" =~ ^(Edit|Write|MultiEdit)$ ]]; then
+        echo "🗃️ [엔티티 수정 경고] 데이터 모델 변경은 신중해야 합니다!" >&2
+        echo "📋 체크리스트:" >&2
+        echo "   □ 기존 데이터 호환성 확인" >&2
+        echo "   □ API 응답(DTO) 변경 필요 여부" >&2
+        echo "   □ Flyway/Liquibase 마이그레이션 파일 생성 필요" >&2
+        echo "   □ Repository 쿼리 수정 필요 여부" >&2
+        echo "💡 영향도를 분석한 후 계획을 세워주세요." >&2
+        exit 2
+    fi
+fi
+
 echo "✅ 모든 규칙 통과" >&2
 exit 0
