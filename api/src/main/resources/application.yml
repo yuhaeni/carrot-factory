@@ -2,6 +2,17 @@ spring:
   application:
     name: carrot-factory
 
+  datasource:
+    url: jdbc:postgresql://localhost:5433/carrot_pipeline
+    username: root
+    password: root1234@
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
   kafka:
     bootstrap-servers: localhost:29092
     producer:

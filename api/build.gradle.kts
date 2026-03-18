@@ -17,7 +17,7 @@ dependencies {
     implementation("org.springframework.kafka:spring-kafka")
 
     // JPA
-//    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
     // Validation
     implementation("org.springframework.boot:spring-boot-starter-validation")
@@ -30,7 +30,8 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     // Database
-//    runtimeOnly("org.postgresql:postgresql")
+    runtimeOnly("org.postgresql:postgresql")
+    implementation("org.flywaydb:flyway-core")
 
     // Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")

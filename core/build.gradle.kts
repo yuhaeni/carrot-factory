@@ -1,22 +1,26 @@
 plugins {
     kotlin("jvm")
+    kotlin("plugin.spring")
+    id("org.springframework.boot")
+    id("io.spring.dependency-management")
 }
 
-group = "com.haeni"
-version = "0.0.1-SNAPSHOT"
-
-repositories {
-    mavenCentral()
+tasks.bootJar { enabled = false }
+tasks.jar {
+    enabled = true
+    archiveClassifier.set("")
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
-}
+    // JPA
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
-kotlin {
-    jvmToolchain(21)
-}
+    // Validation
+    implementation("org.springframework.boot:spring-boot-starter-validation")
 
-tasks.test {
-    useJUnitPlatform()
+    // Kotlin
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+    // Test
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
