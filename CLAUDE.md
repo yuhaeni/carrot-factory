@@ -85,8 +85,9 @@ Credentials: PostgreSQL `root/root1234@`, Redis no auth.
 # Git 워크플로우 규칙
 
 ## 1. Repository
-- **GitHub Repository:** `https://github.com/yuhaeni/usagi-app-api.git`
+- **GitHub Repository:** `https://github.com/yuhaeni/carrot-factory.git`
 - **Main Branch:** `main`
+- **Development Branch:** `dev`
 
 ## 2. Branching Strategy
 - 모든 기능 개발은 `feature/[이슈번호]-[간단-설명-kebab-case]` 형식의 브랜치에서 진행한다.
@@ -99,6 +100,7 @@ Credentials: PostgreSQL `root/root1234@`, Redis no auth.
 - 커밋 본문에는 변경 이유를 명확히 서술하고, 관련된 GitHub 이슈가 있는 경우에는 `Closes #[이슈번호]` 형식으로 반드시 포함한다.
 
 ## 4. Pull Request (PR) Process
-- 모든 코드는 `main` 브랜치로 직접 푸시할 수 없으며, 반드시 PR을 통해 코드 리뷰를 받아야 한다.
+- 모든 코드는 `dev` 브랜치로 PR을 통해 코드 리뷰를 받아야 한다.
+- `dev` 브랜치는 검증 후 `main` 브랜치로 병합한다.
 - PR 제목은 커밋 메시지와 동일한 형식을 따른다.
 - PR 본문은 `.github/PULL_REQUEST_TEMPLATE.md` 템플릿을 사용한다.
