@@ -1,3 +1,6 @@
+server:
+  port: 8081
+
 spring:
   application:
     name: carrot-factory
@@ -23,3 +26,8 @@ spring:
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+  data:
+    redis:
+      host: localhost
+      port: 6378
