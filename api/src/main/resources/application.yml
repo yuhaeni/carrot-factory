@@ -1,6 +1,24 @@
+server:
+  port: 8081
+
 spring:
   application:
     name: carrot-factory
+
+  datasource:
+    url: jdbc:postgresql://localhost:5433/carrot_pipeline
+    username: root
+    password: root1234@
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
 
   kafka:
     bootstrap-servers: localhost:29092
@@ -12,3 +30,8 @@ spring:
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+  data:
+    redis:
+      host: localhost
+      port: 6378

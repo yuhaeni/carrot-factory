@@ -1,10 +1,12 @@
 plugins {
     kotlin("jvm") version "2.2.21"
     kotlin("plugin.spring") version "2.2.21"
+    kotlin("plugin.jpa") version "2.2.21"
     id("org.springframework.boot") version "4.0.3"
     id("io.spring.dependency-management") version "1.1.7"
+    id("com.diffplug.spotless") version "8.1.0"
+    id("org.jlleitschuh.gradle.ktlint") version "14.0.1"
 }
-
 
 allprojects {
     group = "com.haeni"
@@ -34,5 +36,4 @@ subprojects {
     tasks.withType<Test> {
         useJUnitPlatform()
     }
-
 }
